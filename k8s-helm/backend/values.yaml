@@ -1,0 +1,20 @@
+name: project-backend-deployment
+namespace: project-ns
+replicas: 2
+podLabels:
+  app/name: springboot
+  app/component: backend
+container:
+  image: ravishankar90/project123-demo
+  ports:
+    containerPort: 8080
+    mysql:
+      url: jdbc:mysql://mysql-service:3306/test_ravi
+      username:
+        secretKeyRef:
+          name: mongodb-cred
+          key: MYSQL_USER
+      password:
+        secretKeyRef:
+          name: mongodb-cred
+          key: MYSQL_PASSWORD

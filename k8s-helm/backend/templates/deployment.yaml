@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app/name: {{ .Values.podLabels.app/name }}
+  template:
+    metadata:
+      labels:
+        app/name: {{ .Values.podLabels.app/name }}
+        app/component: {{ .Values.podLabels.app/component }}
+    spec:
+      containers:
+      - name: backend-container
+        image: {{ .Values.container.image }}
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: {{ .Values.container.ports.containerPort }}
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: {{ .Values.container.ports.mysql.url }}
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.container.ports.mysql.username.secretKeyRef.name }}
+              key: {{ .Values.container.ports.mysql.username.secretKeyRef.key }}
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.container.ports.mysql.password.secretKeyRef.name }}
+              key: {{ .Values.container.ports.mysql.password.secretKeyRef.key }}

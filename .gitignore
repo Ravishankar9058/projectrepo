@@ -1,0 +1,48 @@
+# ========================
+# Java / Spring Boot
+# ========================
+oled/build/
+oled/.gradle/
+oled/bin/
+*.class
+*.jar
+*.war
+*.ear
+HELP.md
+
+# ========================
+# Node / React / Vite
+# ========================
+frontend/frontend/node_modules/
+frontend/frontend/dist/
+frontend/frontend/.env
+frontend/frontend/.env.local
+frontend/frontend/.env.production
+
+# ========================
+# Helm
+# ========================
+k8s-helm/packages/
+*.tgz
+
+# ========================
+# Docker
+# ========================
+.dockerignore
+
+# ========================
+# IDE / OS
+# ========================
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# ========================
+# Secrets / Sensitive
+# ========================
+*.pem
+*.key
+*.env
+kubeconfig

@@ -1,0 +1,31 @@
+architecture: replicatSet
+useStatefulSet: true
+replicaCount: 2
+auth:
+  rootUser: admin
+  rootPassword: admin@123
+  database: mydb
+  user: user
+  password: user@123
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 1Gi
+  storageClass: standard
+service:
+  type: ClusterIP
+  port: 3306
+  targetPort: 3306
+  nodePort: null
+  loadBalancerIP: null
+  loadBalancerSourceRanges: []
+  externalTrafficPolicy: Cluster
+  annotations: {}
+  labels: {}
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi   

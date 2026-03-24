@@ -1,0 +1,13 @@
+namespace: project-ns
+
+ingress:
+  name: ingress-service
+  className: nginx
+
+frontend:
+  serviceName: frontend-service
+  servicePort: 80
+
+backend:
+  serviceName: backend-service
+  servicePort: 8080
