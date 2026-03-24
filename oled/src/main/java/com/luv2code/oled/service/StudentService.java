@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class StudentService {
@@ -33,7 +34,7 @@ public class StudentService {
                     .body(Map.of("error", "Student age must be between 6 and 16"));
         }
 
-        School school = schoolRepository.findById(schoolId).orElse(null);
+        School school = schoolRepository.findById(Objects.requireNonNull(schoolId)).orElse(null);
         if (school == null) {
             return ResponseEntity.badRequest()
                     .body(Map.of("error", "School not found with id: " + schoolId));
@@ -49,7 +50,7 @@ public class StudentService {
                     .body(Map.of("error", "Student age must be between 6 and 16"));
         }
 
-        Student existing = studentRepository.findById(studentId).orElse(null);
+        Student existing = studentRepository.findById(Objects.requireNonNull(studentId)).orElse(null);
         if (existing == null || !schoolId.equals(existing.getSchool().getId())) {
             return ResponseEntity.badRequest()
                     .body(Map.of("error", "Student not found in this school"));
@@ -63,7 +64,7 @@ public class StudentService {
     }
 
     public ResponseEntity<?> deleteStudent(Long schoolId, Long studentId) {
-        Student existing = studentRepository.findById(studentId).orElse(null);
+        Student existing = studentRepository.findById(Objects.requireNonNull(studentId)).orElse(null);
         if (existing == null || !schoolId.equals(existing.getSchool().getId())) {
             return ResponseEntity.badRequest()
                     .body(Map.of("error", "Student not found in this school"));

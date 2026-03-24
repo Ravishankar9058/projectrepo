@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class SchoolService {
@@ -42,6 +43,6 @@ public class SchoolService {
     }
 
     public School findById(Long id) {
-        return schoolRepository.findById(id).orElse(null);
+        return schoolRepository.findById(Objects.requireNonNull(id)).orElse(null);
     }
 }
